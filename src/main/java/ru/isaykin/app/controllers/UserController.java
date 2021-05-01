@@ -3,16 +3,14 @@ package ru.isaykin.app.controllers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.isaykin.app.exceptions.UserIsAlreadyExistException;
-import ru.isaykin.app.exceptions.UserNotFoundException;
-import ru.isaykin.app.model.User;
+import ru.isaykin.app.DTO.UserDTO;
 import ru.isaykin.app.services.UserService;
 
 import javax.validation.Valid;
 import java.util.Map;
-import java.util.NoSuchElementException;
 
-import static org.springframework.http.HttpStatus.*;
+import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.OK;
 
 @Slf4j
 @RestController
@@ -27,31 +25,21 @@ public class UserController {
     }
 
     @GetMapping("users/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
-        ResponseEntity<User> result;
-        try {
-            User user = userService.getUserById(id);
-            result = new ResponseEntity<>(user, OK);
-        } catch (UserNotFoundException exception) {
-            log.info("Incorrect id of person");
-            result = new ResponseEntity<>(NOT_FOUND);
-        }
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
+
+        ResponseEntity<UserDTO> result;
+        UserDTO userDTO = userService.getUserById(id);
+        result = new ResponseEntity<>(userDTO, OK);
         return result;
     }
-
 
     @PostMapping("users")
-    public ResponseEntity<Long> addNewUser(@Valid @RequestBody User user) {
+    public ResponseEntity<Long> addNewUser(@Valid @RequestBody UserDTO userDTO) {
         ResponseEntity<Long> result;
-        Long personId = userService.addUser(user);
-        if (personId == null) {
-            result = new ResponseEntity<>(BAD_REQUEST);
-        } else {
-            result = new ResponseEntity<>(personId, CREATED);
-        }
+        Long personId = userService.addUser(userDTO);
+        result = new ResponseEntity<>(personId, CREATED);
         return result;
     }
-
 
     @PatchMapping("users/{id}")
     public ResponseEntity<Map> updateStatus(@PathVariable Long id,

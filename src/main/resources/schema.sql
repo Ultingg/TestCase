@@ -7,6 +7,7 @@ create table users
     phone_number varchar(12),
     email        varchar UNIQUE,
     status       varchar(7),
+    online_timestamp timestamp without time zone,
     primary key (id)
 );
 

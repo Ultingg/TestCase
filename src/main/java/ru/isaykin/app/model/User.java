@@ -5,9 +5,7 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 
 @Data
 @Table(value = "users")
@@ -15,16 +13,12 @@ public class User {
 
     @Id
     private Long id;
-
-    @Size(min = 1, max = 80, message = "Incorrect name. Min size = 1, Max size = 80")
-    @Pattern(regexp = "[\\s?[a-zA-Zа-яА-я]*\\s?]{1,80}", message = "Incorrect name. Use only letters.")
     private String name;
-    @Pattern(regexp = "(\\+)[0-9]{11,13}", message = "Incorrect phone number. Use this format +70123456789 or +7012345678910.")
     private String phoneNumber;
-    @Email(message = "Incorrect email. Please enter email in that form: myemailname@email.ru")
     private String email;
-    @Pattern(regexp = "(Offline|Online|Away)", message = "Incorrect status. Use this format Offline, Online, Away.")
     private String status;
+    private LocalDateTime onlineTimestamp;
 
+    public User(){};
 
 }

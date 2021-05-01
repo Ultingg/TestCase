@@ -1,6 +1,5 @@
 package ru.isaykin.app.exceptions;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -12,6 +11,7 @@ import java.util.List;
 
 @Data
 public class ApiError {
+
     private LocalDateTime timestamp;
     private String status;
     private String message;
@@ -21,7 +21,6 @@ public class ApiError {
         timestamp = LocalDateTime.now();
         this.status = status.toString();
         this.message = message;
-
     }
 
     void addValidationErrors(List<FieldError> fieldErrors) {

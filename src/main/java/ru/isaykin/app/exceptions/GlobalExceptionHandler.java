@@ -32,43 +32,32 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = IncorrectStatusException.class)
     public ResponseEntity<Object> handleIncorrectStatusException(IncorrectStatusException exception) {
+        return getResponseEntityWithBody(BAD_REQUEST, exception);
+    }
+
+    private ResponseEntity<Object> getResponseEntityWithBody(HttpStatus status, Exception exception) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", new Date());
-        body.put("status", BAD_REQUEST.toString());
+        body.put("status", status.toString());
         body.put("message", exception.getMessage());
         return new ResponseEntity<>(
-                body, BAD_REQUEST);
+                body, status);
     }
 
     @ExceptionHandler(value = UserNotFoundException.class)
     public ResponseEntity<Object> handleNotFoundException(UserNotFoundException exception) {
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", new Date());
-        body.put("status", NOT_FOUND.toString());
-        body.put("message", exception.getMessage());
-        return new ResponseEntity<>(
-                body, NOT_FOUND);
+        return getResponseEntityWithBody(NOT_FOUND, exception);
     }
 
     @ExceptionHandler(value = UserIsAlreadyExistException.class)
     public ResponseEntity<Object> handleIsAlreadyExistException(UserIsAlreadyExistException exception) {
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", new Date());
-        body.put("status", NOT_FOUND.toString());
-        body.put("message", exception.getMessage());
-        return new ResponseEntity<>(
-                body, NOT_FOUND);
+        return getResponseEntityWithBody(NOT_FOUND, exception);
     }
 
     @ExceptionHandler(value = DbActionExecutionException.class)
     public ResponseEntity<Object> handleDuplicateException(DbActionExecutionException exception) {
-        Map<String, Object> body = new LinkedHashMap<>();
         PSQLException psqlException = unwrapCause(PSQLException.class, exception);
-        body.put("timestamp", new Date());
-        body.put("status", BAD_REQUEST.toString());
-        body.put("message", psqlException.getMessage());
-        return new ResponseEntity<>(
-                body, BAD_REQUEST);
+        return getResponseEntityWithBody(BAD_REQUEST, psqlException);
     }
 
     public static <T> T unwrapCause(Class<T> clazz, Throwable e) {

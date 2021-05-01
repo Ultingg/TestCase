@@ -1,15 +1,15 @@
 package ru.isaykin.app.services;
 
-import ru.isaykin.app.model.User;
+import ru.isaykin.app.DTO.UserDTO;
 
 import java.util.Map;
 
 public interface UserService {
 
-    public Long addUser(User user);
+    Long addUser(UserDTO userDTO);
 
-    public User getUserById(Long id);
+    UserDTO getUserById(Long id);
 
-    public Map<String, Object> updateStatus(Long id, String newStatus);
+    Map<String, Object> updateStatus(Long id, String newStatus);
 }
 
