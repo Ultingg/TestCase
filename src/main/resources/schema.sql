@@ -1,0 +1,12 @@
+
+drop table if exists users cascade;
+create table users
+(
+    id           serial      not null,
+    name         varchar(80) not null,
+    phone_number varchar(12),
+    email        varchar UNIQUE,
+    status       varchar(7),
+    primary key (id)
+);
+
