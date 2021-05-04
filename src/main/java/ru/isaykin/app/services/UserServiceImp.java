@@ -30,7 +30,7 @@ public class UserServiceImp implements UserService {
         }
         User user = UserMapper.INSTANCE.fromUserDTOToUser(userDTO);
         user.setOnlineTimestamp(LocalDateTime.now());
-        userRepository.save(user);
+        user = userRepository.save(user);
         return user.getId();
     }
 
@@ -58,10 +58,11 @@ public class UserServiceImp implements UserService {
     public Map<String, Object> updateStatus(Long id, UserDTO userDTO) {
         String newStatus = userDTO.getStatus();
         User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("Wrong id. Person not found."));
-        if (newStatus.equals("Online")) updateOnlineTimestamp(user);
-        Map<String, Object> responseMap = new HashMap<>();
         if (!statusValidation(newStatus))
             throw new IncorrectStatusException("Incorrect status. Use this format Offline, Online, Away.");
+        if (newStatus.equals("Online")) updateOnlineTimestamp(user);
+        Map<String, Object> responseMap = new HashMap<>();
+
         responseMap.put("oldStatus", user.getStatus());
         responseMap.put("newStatus", newStatus);
         responseMap.put("personId", id);
