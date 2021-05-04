@@ -15,8 +15,7 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.*;
 
 @SuppressWarnings("NullableProblems")
 @ControllerAdvice
@@ -60,7 +59,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         PSQLException psqlException = unwrapCause(PSQLException.class, exception);
         assert psqlException != null;
-        return getResponseEntityWithBody(BAD_REQUEST, psqlException);
+        return getResponseEntityWithBody(CONFLICT, psqlException);
     }
 
     public static <T> T unwrapCause(Class<T> clazz, Throwable e) {
