@@ -5,7 +5,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
-import ru.isaykin.app.DTO.UserDTO;
+import ru.isaykin.app.dto.UserDTO;
 import ru.isaykin.app.model.User;
 
 @Mapper(componentModel = "spring")

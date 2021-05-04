@@ -1,3 +1,5 @@
+# noinspection SqlResolveForFile
+
 INSERT INTO  users ( name, phone_number, email, status, online_timestamp)
 VALUES ( 'Леонид', '+79624568799','leoleo@inbox.ru', 'Online','2021-04-19 10:23:54'),
        ( 'Степан', '+79114569782','stepbystep@mail.ru','Offline','2021-04-19 10:23:54'),

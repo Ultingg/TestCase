@@ -1,6 +1,6 @@
 package ru.isaykin.app.services;
 
-import ru.isaykin.app.DTO.UserDTO;
+import ru.isaykin.app.dto.UserDTO;
 
 import java.util.Map;
 
@@ -10,6 +10,6 @@ public interface UserService {
 
     UserDTO getUserById(Long id);
 
-    Map<String, Object> updateStatus(Long id, String newStatus);
+    Map<String, Object> updateStatus(Long id, UserDTO userDTO);
 }
 

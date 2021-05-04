@@ -18,6 +18,7 @@ import java.util.Map;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
+@SuppressWarnings("NullableProblems")
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -56,7 +57,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = DbActionExecutionException.class)
     public ResponseEntity<Object> handleDuplicateException(DbActionExecutionException exception) {
+
         PSQLException psqlException = unwrapCause(PSQLException.class, exception);
+        assert psqlException != null;
         return getResponseEntityWithBody(BAD_REQUEST, psqlException);
     }
 

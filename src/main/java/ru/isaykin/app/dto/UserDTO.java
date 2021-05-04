@@ -1,4 +1,4 @@
-package ru.isaykin.app.DTO;
+package ru.isaykin.app.dto;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;

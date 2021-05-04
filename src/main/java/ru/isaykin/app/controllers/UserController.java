@@ -3,7 +3,7 @@ package ru.isaykin.app.controllers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.isaykin.app.DTO.UserDTO;
+import ru.isaykin.app.dto.UserDTO;
 import ru.isaykin.app.services.UserService;
 
 import javax.validation.Valid;
@@ -41,11 +41,11 @@ public class UserController {
         return result;
     }
 
-    @PatchMapping("users/{id}")
-    public ResponseEntity<Map> updateStatus(@PathVariable Long id,
-                                            @RequestParam String status) {
-        ResponseEntity<Map> result;
-        Map<String, Object> responseMap = userService.updateStatus(id, status);
+    @PutMapping("users/{id}")
+    public ResponseEntity<Map<String, Object>> updateStatus(@PathVariable Long id,
+                                            @Valid @RequestBody UserDTO userDTO) {
+        ResponseEntity<Map<String, Object>> result;
+        Map<String, Object> responseMap = userService.updateStatus(id, userDTO);
         result = new ResponseEntity<>(responseMap, OK);
         return result;
     }

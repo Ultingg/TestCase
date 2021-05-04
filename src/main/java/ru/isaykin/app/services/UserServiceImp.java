@@ -1,7 +1,7 @@
 package ru.isaykin.app.services;
 
 import org.springframework.stereotype.Service;
-import ru.isaykin.app.DTO.UserDTO;
+import ru.isaykin.app.dto.UserDTO;
 import ru.isaykin.app.exceptions.IncorrectStatusException;
 import ru.isaykin.app.exceptions.UserIsAlreadyExistException;
 import ru.isaykin.app.exceptions.UserNotFoundException;
@@ -44,7 +44,7 @@ public class UserServiceImp implements UserService {
     }
 
     private boolean checkIfOnlineStatusExpired(User user) {
-        LocalDateTime timeLimit = user.getOnlineTimestamp().plus(15, ChronoUnit.SECONDS);
+        LocalDateTime timeLimit = user.getOnlineTimestamp().plus(5, ChronoUnit.MINUTES);
         LocalDateTime now = LocalDateTime.now();
         return timeLimit.isBefore(now);
     }
@@ -55,7 +55,8 @@ public class UserServiceImp implements UserService {
         userRepository.save(user);
     }
 
-    public Map<String, Object> updateStatus(Long id, String newStatus) {
+    public Map<String, Object> updateStatus(Long id, UserDTO userDTO) {
+        String newStatus = userDTO.getStatus();
         User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("Wrong id. Person not found."));
         if (newStatus.equals("Online")) updateOnlineTimestamp(user);
         Map<String, Object> responseMap = new HashMap<>();

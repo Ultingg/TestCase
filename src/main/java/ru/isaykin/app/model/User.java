@@ -19,6 +19,6 @@ public class User {
     private String status;
     private LocalDateTime onlineTimestamp;
 
-    public User(){};
+    public User(){}
 
 }
