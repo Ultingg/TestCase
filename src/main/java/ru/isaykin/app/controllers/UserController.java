@@ -17,7 +17,6 @@ import static org.springframework.http.HttpStatus.OK;
 @RequestMapping
 public class UserController {
 
-
     private final UserService userService;
 
     public UserController(UserService userService) {
@@ -43,12 +42,10 @@ public class UserController {
 
     @PutMapping("users/{id}")
     public ResponseEntity<Map<String, Object>> updateStatus(@PathVariable Long id,
-                                            @Valid @RequestBody UserDTO userDTO) {
+                                                            @Valid @RequestBody UserDTO userDTO) {
         ResponseEntity<Map<String, Object>> result;
         Map<String, Object> responseMap = userService.updateStatus(id, userDTO);
         result = new ResponseEntity<>(responseMap, OK);
         return result;
     }
-
-
 }

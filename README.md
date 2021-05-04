@@ -1,6 +1,8 @@
 # TestCase
 This is server part of RESTful web-application. Working with HTTP responses and JSON.
-It's working with Postgres DB, there are  scripts to initialize DB in resources folder: schema.sql (to create databse and table) and data.sql (to settle table).
+It's working with Postgres DB, there are  scripts to initialize DB in resources folder: schema.sql (to create table) and data.sql (to settle table).
+In src\main\resources\application.yml you could find username:postgres and password: 9999 for connection to DB;
+
 Also, there is postman collection of requests in postmanCollection folder to test application.
 
 You could get User by GET request, you could add new User by POST request, and you could update User's status by PUT request. User's "Online" status has expired time - 5 minutes, 

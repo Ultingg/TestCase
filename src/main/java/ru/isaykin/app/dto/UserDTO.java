@@ -11,7 +11,6 @@ import javax.validation.constraints.Size;
 @Component
 public class UserDTO {
 
-
     private Long id;
 
     @Size(min = 1, max = 80, message = "Incorrect name. Min size = 1, Max size = 80")
