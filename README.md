@@ -1,7 +1,16 @@
 # TestCase
+
+
+
 This is server part of RESTful web-application. Working with HTTP responses and JSON.
-It's working with Postgres DB, there are  scripts to initialize DB in resources folder: schema.sql (to create table) and data.sql (to settle table).
-In src\main\resources\application.yml you could find username:postgres and password: 9999 for connection to DB;
+
+Use PostgreSQL.
+
+There are  scripts to initialize DB in src\main\resources: schema.sql (to create table) and data.sql (to settle table).
+
+username:postgres
+
+password: 9999 
 
 Also, there is postman collection of requests in postmanCollection folder to test application.
 
@@ -9,8 +18,7 @@ You could get User by GET request, you could add new User by POST request, and y
 if you don't update it in time it becomes "Away".
 
 
-
-Here is requests:
+API:
 
 GET: http://localhost:8080/users/1  - to getting user's info with id = 1;
 
