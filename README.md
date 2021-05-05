@@ -20,10 +20,12 @@ if you don't update it in time it becomes "Away".
 
 API:
 
-GET: http://localhost:8080/users/1  - to getting user's info with id = 1;
+GET: http://localhost:8080/users/1  
+to getting user's info with id = 1;
 
-POST: http://localhost:8080/users/  - to adding new User to DB, you should pass User in JSON format;
+POST: http://localhost:8080/users/  
+to adding new User to DB, you should pass User in JSON format;
 
-PUT: http://localhost:8080/users/1  - to update User's status, you should pass new status in JSON format.
-                                        There are only three available User's status: Online, Offline, Away;
+PUT: http://localhost:8080/users/1 
+to update User's status, you should pass new status in JSON format. There are only three available User's status: Online, Offline, Away;
 
